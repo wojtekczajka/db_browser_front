@@ -53,7 +53,7 @@
       },
       toggleRegisterForm() {
         this.showRegisterForm = !this.showRegisterForm;
-      }
+      },
     }
   };
   </script>

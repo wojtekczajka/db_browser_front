@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import ResourcesView from '../views/ResourcesView.vue'
 import UserView from '../views/UserView.vue'
+import AuthView from '../views/AuthView.vue'
 // import store from '../store'
 // import { AUTH_LOGOUT } from "../store/actions/auth";
 
@@ -13,6 +14,11 @@ const routes = [
     path: '/',
     name: 'main',
     component: MainView
+  },
+  {
+    path: '/auth',
+    name: 'auth',
+    component: AuthView
   },
   {
     path: '/login',

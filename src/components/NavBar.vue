@@ -12,10 +12,6 @@
                         <router-link class="nav-item nav-link" to="/" exact>Home</router-link>
                         <router-link v-if="isProfileLoaded" class="nav-item nav-link" to="/profile">{{ name }}</router-link>
                         <router-link class="nav-item nav-link" to="/resources">Resources</router-link>
-                        <router-link v-if="!isAuthenticated && !authLoading" class="nav-item nav-link"
-                            to="/register">Register</router-link>
-                        <router-link v-if="!isAuthenticated && !authLoading" class="nav-item nav-link"
-                            to="/login">Login</router-link>
                         <a v-if="isAuthenticated" @click="logout" class="nav-item nav-link" href="#">Logout</a>
                     </div>
                 </div>

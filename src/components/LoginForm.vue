@@ -13,10 +13,12 @@
         </div>
     </form>
     <div class="text-center text-dark mt-3">
-        <p>or log in with:</p>
-        <button type="button" class="btn  btn-floating btn-secondary mx-1 w-100" @click="handleGoogleRegister">
-            <i class="fab fa-google"></i> Google
-        </button>
+        <form @submit.prevent="handleGoogleLogin">
+            <p>or log in with:</p>
+            <button type="submit" class="btn  btn-floating btn-secondary mx-1 w-100">
+                <i class="fab fa-google"></i> Google
+            </button>
+        </form>
     </div>
 </template>
   
@@ -54,7 +56,7 @@ export default {
                 });
         },
         handleGoogleLogin() {
-            window.location.href = "https://fastapi-server-ezey.onrender.com/auth/google_signin/";
+            window.location.href = axios.defaults.baseURL + "/auth/google_signin/";
         },
         checkAccessToken() {
             const accessToken = this.$route.query.access_token;
