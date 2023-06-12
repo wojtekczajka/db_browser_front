@@ -6,12 +6,11 @@
                 <div class="row">
                     <div class="col-md-10 mx-auto">
                         <ul class="list-group">
-                            <li class="list-group-item list-group-item-action list-group-item-dark">Name: {{ name }}</li>
-                            <li class="list-group-item list-group-item-action list-group-item-dark">Id: {{ id }}</li>
-                            <li class="list-group-item list-group-item-action list-group-item-dark">Email: {{ email }}</li>
-                            <li class="list-group-item list-group-item-action list-group-item-dark">Is Active: {{ is_active }}</li>
-                            <li class="list-group-item list-group-item-action list-group-item-dark">Roles: {{ roles }}</li>
-                            <li class="list-group-item list-group-item-action list-group-item-dark">Token: {{ token }}</li>
+                            <li class="list-group-item list-group-item-action list-group-item-light text-dark">Name: {{ name }}</li>
+                            <li class="list-group-item list-group-item-action list-group-item-light text-dark">Id: {{ id }}</li>
+                            <li class="list-group-item list-group-item-action list-group-item-light text-dark">Email: {{ email }}</li>
+                            <li class="list-group-item list-group-item-action list-group-item-light text-dark">Is Active: {{ is_active }}</li>
+                            <li class="list-group-item list-group-item-action list-group-item-light text-dark">Token: {{ token }}</li>
                         </ul>
                     </div>
                 </div>

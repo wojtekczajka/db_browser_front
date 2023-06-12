@@ -40,7 +40,7 @@ export default {
         handleSubmit() {
             axios.post("/auth/signup/", {
                 email: this.email,
-                name: this.username,
+                username: this.username,
                 password: this.password
             })
                 .then(response => {
