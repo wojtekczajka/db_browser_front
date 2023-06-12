@@ -1,28 +1,34 @@
 <template>
-    <form class="text-dark" @submit.prevent="handleSubmit">
-        <div class="mb-3">
-            <label for="inputEmail" class="form-label">E-mail</label>
-            <input type="email" class="form-control" required v-model="email">
-        </div>
-        <div class="mb-3">
-            <label for="inputLogin" class="form-label">Login</label>
-            <input type="text" class="form-control" required v-model="username">
-        </div>
-        <div class="mb-3">
-            <label for="inputPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" required v-model="password">
-        </div>
-        <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary border w-100">Submit</button>
-        </div>
-    </form>
-    <div class="text-center text-dark mt-3">
-        <form @submit.prevent="handleGoogleLogin">
-            <p>or log in with:</p>
-            <button type="submit" class="btn  btn-floating btn-secondary mx-1 w-100">
-                <i class="fab fa-google"></i> Google
-            </button>
+    <div>
+        <form class="text-dark" @submit.prevent="handleSubmit">
+            <div class="mb-3">
+                <label for="inputEmail" class="form-label">E-mail</label>
+                <input type="email" class="form-control" required v-model="email">
+            </div>
+            <div class="mb-3">
+                <label for="inputLogin" class="form-label">Login</label>
+                <input type="text" class="form-control" required v-model="username">
+            </div>
+            <div class="mb-3">
+                <label for="inputPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" required v-model="password">
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary border w-100">Submit</button>
+            </div>
         </form>
+        <div class="text-center text-dark mt-3">
+            <form @submit.prevent="handleGoogleLogin">
+                <p>or log in with:</p>
+                <button type="submit" class="btn  btn-floating btn-secondary mx-1 w-100">
+                    <i class="fab fa-google"></i> Google
+                </button>
+            </form>
+        </div>
+        <div class="login-form-content mt-3">
+            <p class="text-danger" v-if="registerError">Error signing up. Please try again.</p>
+            <p class="text-success" v-if="registerSuccess">Successfully signed up! To complete the registration, activate your account via mail</p>
+        </div>
     </div>
 </template>
   
@@ -38,7 +44,9 @@ export default {
         return {
             email: "",
             username: "",
-            password: ""
+            password: "",
+            registerError: false,
+            registerSuccess: false
         };
     },
     methods: {
@@ -48,18 +56,12 @@ export default {
                 username: this.username,
                 password: this.password
             })
-                .then(response => {
-                    if (response.status === 200) {
-                        alert("Successfully signed up!");
-                        this.$emit("register-success");
-                    } else {
-                        alert("Error signing up. Please try again.");
-                    }
+                .then(() => {
+                        this.registerSuccess = true;  
                 })
                 .catch(error => {
-                    if (error.response && error.response.status !== 200) {
-                        alert("Error signing up. Please try again.");
-                    }
+                    console.log(error);
+                    this.registerError = true;
                 });
         },
         handleGoogleLogin() {
@@ -82,6 +84,9 @@ export default {
                     });
             }
         }
+    },
+    mounted() {
+        this.checkAccessToken();
     }
 };
 </script>

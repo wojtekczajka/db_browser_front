@@ -2,7 +2,7 @@
     <div class="nav-bar">
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <div class="container">
-                <a class="navbar-brand px-2" href="#">Authorization using JWT tokens</a>
+                <a class="navbar-brand px-2" href="#">DB Browser</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -11,7 +11,6 @@
                     <div class="navbar-nav">
                         <router-link class="nav-item nav-link" to="/" exact>Home</router-link>
                         <router-link v-if="isProfileLoaded" class="nav-item nav-link" to="/profile">{{ name }}</router-link>
-                        <router-link class="nav-item nav-link" to="/resources">Resources</router-link>
                         <a v-if="isAuthenticated" @click="logout" class="nav-item nav-link" href="#">Logout</a>
                     </div>
                 </div>
