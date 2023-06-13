@@ -10,6 +10,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <router-link class="nav-item nav-link" to="/" exact>Home</router-link>
+                        <router-link v-if="isAuthenticated" class="nav-item nav-link" to="/browse">Browse</router-link>
                         <router-link v-if="isProfileLoaded" class="nav-item nav-link" to="/profile">{{ name }}</router-link>
                         <a v-if="isAuthenticated" @click="logout" class="nav-item nav-link" href="#">Logout</a>
                     </div>

@@ -1,15 +1,17 @@
 <template>
-  <nav-bar />
-  <!-- <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav> -->
-  <router-view />
+  <div id="app">
+    <NavBar />
+    <!-- <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </nav> -->
+    <router-view />
+    <!-- <FooTer /> -->
+  </div>
 </template>
 
 <style>
 #app {
-
   /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   /* -webkit-font-smoothing: antialiased; */
   /* -moz-osx-font-smoothing: grayscale; */
@@ -20,13 +22,15 @@
 
 <script>
 import axios from 'axios';
-import NavBar from './components/NavBar.vue'
+import NavBar from './components/NavBar.vue';
+// import FooTer from './components/FooTer.vue';
 import { USER_REQUEST } from "./store/actions/user";
 import { AUTH_LOGOUT } from "./store/actions/auth";
 
 export default {
   components: {
-    NavBar
+    NavBar,
+    // FooTer
   },
   name: 'MainView',
   created: function () {
