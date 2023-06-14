@@ -70,6 +70,7 @@ export default {
     },
     checkAccessToken() {
       const accessToken = this.$route.query.access_token;
+      console.log('log');
       if (accessToken) {
         this.$store.commit(AUTH_REQUEST);
         this.$store.commit(AUTH_SUCCESS, accessToken);
