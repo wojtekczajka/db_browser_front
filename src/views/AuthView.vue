@@ -30,6 +30,10 @@
 <script>
 import LoginForm from "@/components/LoginForm.vue";
 import RegisterForm from "@/components/RegisterForm.vue";
+import axios from "axios";
+import { AUTH_REQUEST } from "../store/actions/auth";
+import { AUTH_SUCCESS } from "../store/actions/auth";
+import { USER_REQUEST } from "../store/actions/user";
 
 export default {
   name: "AuthView",
