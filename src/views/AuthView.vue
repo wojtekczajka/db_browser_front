@@ -1,72 +1,94 @@
 <template>
-    <div class="container-fluid">
-      <div class="row justify-content-center align-items-center" style="height: 100vh;">
-        <transition name="fade" :duration="{ enter: 1000, leave: 1000 }" mode="out-in">
-          <div class="col-md-4 col-sm-8 col-10 border p-4 bg-light" :key="showRegisterForm">
-            <transition name="fade">
-              <template v-if="!showRegisterForm">
-                <LoginForm @login-success="handleLoginSuccess" />
-              </template>
-              <template v-else>
-                <RegisterForm @register-success="handleRegisterSuccess" />
-              </template>
-            </transition>
-            <div class="text-center text-dark mt-3">
-              <p v-if="!showRegisterForm">
-                Don't have an account?
-                <a href="#" @click.prevent="toggleRegisterForm">Register</a>
-              </p>
-              <p v-else>
-                Already have an account?
-                <a href="#" @click.prevent="toggleRegisterForm">Login</a>
-              </p>
-            </div>
+  <div class="container-fluid">
+    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+      <transition name="fade" :duration="{ enter: 1000, leave: 1000 }" mode="out-in">
+        <div class="col-md-4 col-sm-8 col-10 border p-4 bg-light" :key="showRegisterForm">
+          <transition name="fade">
+            <template v-if="!showRegisterForm">
+              <LoginForm @login-success="handleLoginSuccess" />
+            </template>
+            <template v-else>
+              <RegisterForm @register-success="handleRegisterSuccess" />
+            </template>
+          </transition>
+          <div class="text-center text-dark mt-3">
+            <p v-if="!showRegisterForm">
+              Don't have an account?
+              <a href="#" @click.prevent="toggleRegisterForm">Register</a>
+            </p>
+            <p v-else>
+              Already have an account?
+              <a href="#" @click.prevent="toggleRegisterForm">Login</a>
+            </p>
           </div>
-        </transition>
-      </div>
+        </div>
+      </transition>
     </div>
-  </template>
+  </div>
+</template>
   
-  <script>
-  import LoginForm from "@/components/LoginForm.vue";
-  import RegisterForm from "@/components/RegisterForm.vue";
-  
-  export default {
-    name: "AuthView",
-    components: {
-      LoginForm,
-      RegisterForm
+<script>
+import LoginForm from "@/components/LoginForm.vue";
+import RegisterForm from "@/components/RegisterForm.vue";
+
+export default {
+  name: "AuthView",
+  components: {
+    LoginForm,
+    RegisterForm
+  },
+  data() {
+    return {
+      showRegisterForm: false
+    };
+  },
+  methods: {
+    handleLoginSuccess() {
+      alert("You have been successfully logged in :)");
+      this.$router.push("/");
     },
-    data() {
-      return {
-        showRegisterForm: false
-      };
+    handleRegisterSuccess() {
+      alert("Successfully signed up!");
+      this.showRegisterForm = false;
     },
-    methods: {
-      handleLoginSuccess() {
-        alert("You have been successfully logged in :)");
-        this.$router.push("/");
-      },
-      handleRegisterSuccess() {
-        alert("Successfully signed up!");
-        this.showRegisterForm = false;
-      },
-      toggleRegisterForm() {
-        this.showRegisterForm = !this.showRegisterForm;
-      },
+    toggleRegisterForm() {
+      this.showRegisterForm = !this.showRegisterForm;
+    },
+    checkAccessToken() {
+      const accessToken = this.$route.query.access_token;
+      console.log('log');
+      if (accessToken) {
+        this.$store.commit(AUTH_REQUEST);
+        this.$store.commit(AUTH_SUCCESS, accessToken);
+        axios.defaults.headers.common['Authorization'] = "Bearer " + accessToken;
+        localStorage.setItem("user-token", accessToken);
+        console.log(accessToken);
+        this.$store.dispatch(USER_REQUEST)
+          .then(() => {
+            this.$router.push("/");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
-  };
-  </script>
-  
-  <style>
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.5s;
+  },
+  mounted() {
+    this.checkAccessToken();
+    this.checkActivationSuccess();
   }
+};
+</script>
   
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
-  }
-  </style>
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
   

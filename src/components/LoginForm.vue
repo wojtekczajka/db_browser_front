@@ -58,7 +58,6 @@ export default {
           setTimeout(() => {
             this.$router.push("/");
           }, 1000);
-          this.$router.push("/");
         })
         .catch((error) => {
           this.loginError = true;
