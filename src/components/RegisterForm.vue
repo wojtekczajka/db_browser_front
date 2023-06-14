@@ -20,9 +20,7 @@
         <div class="text-center text-dark mt-3">
             <form @submit.prevent="handleGoogleLogin">
                 <p>or log in with:</p>
-                <button type="submit" class="btn  btn-floating btn-secondary mx-1 w-100">
-                    <i class="fab fa-google"></i> Google
-                </button>
+                <input type="submit" class="btn btn-secondary w-100" value="Continue with Google">
             </form>
         </div>
         <div class="login-form-content mt-3">
