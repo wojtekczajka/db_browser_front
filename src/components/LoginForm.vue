@@ -75,6 +75,7 @@ export default {
         this.$store.commit(AUTH_SUCCESS, accessToken);
         axios.defaults.headers.common['Authorization'] = "Bearer " + accessToken;
         localStorage.setItem("user-token", accessToken);
+        console.log(accessToken);
         this.$store.dispatch(USER_REQUEST)
           .then(() => {
             this.loginSuccess = true;
