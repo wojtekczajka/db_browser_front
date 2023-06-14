@@ -7,27 +7,27 @@ import BrowseView from '../views/BrowseView.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/db_browser_front/',
     name: 'main',
     component: MainView
   },
   {
-    path: '/auth',
+    path: '/db_browser_front/auth',
     name: 'auth',
     component: AuthView
   },
   {
-    path: '/resources',
+    path: '/db_browser_front/resources',
     name: 'resources',
     component: ResourcesView
   },
   {
-    path: '/profile',
+    path: '/db_browser_front/profile',
     name: 'user',
     component: UserView
   },
   {
-    path: '/browse',
+    path: '/db_browser_front/browse',
     name: 'browse',
     component: BrowseView
   }
@@ -37,7 +37,5 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
-
-
 
 export default router
