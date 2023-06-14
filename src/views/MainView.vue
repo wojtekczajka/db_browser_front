@@ -7,18 +7,18 @@
       <!-- Separate route or component for authentication -->
     </div>
     <div v-else class="text-dark">
-      <div v-if="databaseInfo" class="d-flex align-items-center justify-content-center w-100 vh-100">
-        <div class="text-center">
-          <h2>Database Name: {{ databaseInfo.db_name }}</h2>
-          <div class="list-group">
+      <div v-if="databaseInfo" class="row justify-content-center mt-5">
+        <div class="col-md-8">
+          <h2 class="text-center text-dark">Database Name: {{ databaseInfo.db_name }}</h2>
+          <ul class="list-group">
             <li class="list-group-item list-group-item-action active">Table List</li>
-            <li class="list-group-item list-group-item-action" v-for="table in databaseInfo.db_tables" :key="table">
+            <li class="list-group-item list-group-item-action" v-for="table in databaseInfo.db_tables" :key="table" @click="redirectToBrowse(table)">
               {{ table }}
             </li>
-          </div>
-          <router-link to="/browse" class="btn btn-secondary w-100 mt-3">Browse Data</router-link>
+          </ul>
         </div>
       </div>
+
       <div v-else>
         <p>Loading database information...</p>
       </div>
@@ -47,7 +47,9 @@ export default {
     },
   },
   created() {
-    this.fetchDatabaseInfo();
+    if (this.isAuthenticated) {
+      this.fetchDatabaseInfo();
+    }
   },
   methods: {
     fetchDatabaseInfo() {
@@ -59,6 +61,12 @@ export default {
         .catch((error) => {
           console.error("Error fetching database information:", error);
         });
+    },
+    redirectToBrowse(table) {
+      this.$router.push({
+        path: "/browse",
+        query: { table },
+      });
     },
   },
 };
